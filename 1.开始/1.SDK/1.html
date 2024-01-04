@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SDK</title>
+  <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+  <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+  <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+  <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+  (function () {
+    let amis = amisRequire('amis/embed');
+    // 通过替换下面这个配置来生成不同页面
+    let amisJSON = {
+      type: 'page',
+      title: '表单页面',
+      body: {
+        type: 'form',
+        mode: 'horizontal',
+        api: '/saveForm',
+        body: [
+          {
+            label: 'Name',
+            type: 'input-text',
+            name: 'name'
+          },
+          {
+            label: 'Email',
+            type: 'input-email',
+            name: 'email'
+          }
+        ]
+      }
+    };
+    const amisScoped = amis.embed('#root', amisJSON);
+    console.log(amisScoped)
+  })();
+</script>
+</html>
