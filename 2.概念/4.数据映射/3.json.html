@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            title: '自定义 api 请求体数据格式',
+            data: {
+                userForm: {
+                    name: 'One',
+                    email: 'xx@qq.com',
+                    hidden: {
+                        uid: '0011',
+                        time: Date.now()
+                    }
+                }
+            },
+            body: '${userForm | json:2}'
+        };
+        const amisScoped = amis.embed('#root', amisJSON);
+        console.log(amisScoped)
+    })();
+</script>
+
+</html>

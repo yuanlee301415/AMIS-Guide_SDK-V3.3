@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板引擎</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            title: '模板引擎',
+            data: {
+                user: 'NoOne',
+                items: ['A', 'B', 'C']
+            },
+            body: [
+                { type: 'tpl', tpl: 'User: <%- data.user %>'},
+                { type: 'divider' },
+                { type: 'tpl', tpl: '<% if(data && data.items){%> Array: <%data.items.forEach(function(item) {%> <span class="label label-default"><%- item %></span> <%})}%>' }
+            ]
+        };
+        const amisScoped = amis.embed('#root', amisJSON);
+        console.log(amisScoped)
+    })();
+</script>
+
+</html>

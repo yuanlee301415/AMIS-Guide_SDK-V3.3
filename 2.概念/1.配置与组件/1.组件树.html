@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件树</title>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amisJSON = {
+            type: 'page',
+            title: '组件树',
+            body: [
+                {type: 'tpl', tpl: '表单'},
+                {type: 'divider'},
+                {
+                    type: 'form',
+                    body: [
+                        {type: 'input-text', name: 'userName', label: '用户名'}
+                    ]
+                }
+            ]
+        };
+        const amis = amisRequire('amis/embed');
+        const amisScoped = amis.embed('#root', amisJSON);
+        console.log(amisScoped)
+    })();
+</script>
+
+</html>

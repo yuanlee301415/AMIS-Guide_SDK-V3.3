@@ -1,0 +1,91 @@
+{
+  "status": 0,
+  "msg": "ok",
+  "data": {
+    "count": 1710,
+    "rows": [
+      {
+        "engine": "Trident - z8ynfr",
+        "browser": "Internet Explorer 4.0",
+        "platform": "Win 95+",
+        "version": "4",
+        "grade": "X",
+        "badgeText": "默认",
+        "id": 1
+      },
+      {
+        "engine": "Trident - 61ug8c",
+        "browser": "Internet Explorer 5.0",
+        "platform": "Win 95+",
+        "version": "5",
+        "grade": "C",
+        "badgeText": "危险",
+        "id": 2
+      },
+      {
+        "engine": "Trident - q79ku",
+        "browser": "Internet Explorer 5.5",
+        "platform": "Win 95+",
+        "version": "5.5",
+        "grade": "A",
+        "id": 3
+      },
+      {
+        "engine": "Trident - pbuhgg",
+        "browser": "Internet Explorer 6",
+        "platform": "Win 98+",
+        "version": "6",
+        "grade": "A",
+        "id": 4
+      },
+      {
+        "engine": "Trident - j6qc5",
+        "browser": "Internet Explorer 7",
+        "platform": "Win XP SP2+",
+        "version": "7",
+        "grade": "A",
+        "id": 5
+      },
+      {
+        "engine": "Trident - 03tl3e",
+        "browser": "AOL browser (AOL desktop)",
+        "platform": "Win XP",
+        "version": "6",
+        "grade": "A",
+        "id": 6
+      },
+      {
+        "engine": "Gecko - 5ai5i",
+        "browser": "Firefox 1.0",
+        "platform": "Win 98+ / OSX.2+",
+        "version": "1.7",
+        "grade": "A",
+        "id": 7
+      },
+      {
+        "engine": "Gecko - 000vh9",
+        "browser": "Firefox 1.5",
+        "platform": "Win 98+ / OSX.2+",
+        "version": "1.8",
+        "grade": "A",
+        "id": 8
+      },
+      {
+        "engine": "Gecko - rt41m8",
+        "browser": "Firefox 2.0",
+        "platform": "Win 98+ / OSX.2+",
+        "version": "1.8",
+        "grade": "A",
+        "id": 9
+      },
+      {
+        "engine": "Gecko - 47ayw",
+        "browser": "Firefox 3.0",
+        "platform": "Win 2k+ / OSX.3+",
+        "version": "1.9",
+        "grade": "A",
+        "id": 10
+      }
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件配置联动</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'form',
+            title: '组件配置联动',
+            body: [
+                {
+                    type: 'radios',
+                    name: 'foo',
+                    options: [
+                        { label: '1', value: 1 },
+                        { label: '2', value: 2 }
+                    ]
+                },
+                {
+                    type: 'input-text',
+                    label: 'Text-1',
+                    visibleOn: '${foo === 1}'
+                },
+                {
+                    type: 'input-text',
+                    label: 'Text-2',
+                    disabledOn: '${OR(foo === 2)}'
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
