@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件监听</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            title: '表单页面',
+            body: [
+                {
+                    type: 'form',
+                    mode: 'horizontal',
+                    onFinished: values => {
+                        console.log('form', values);
+                        return false; // 这样可以禁掉 amis 后续的默认行为
+                    },
+                    body: [
+                        {
+                            label: 'Name',
+                            type: 'input-text',
+                            name: 'name',
+                            onChange: value => {
+                                console.log('Name', value);
+                            }
+                        },
+                        {
+                            type: 'button',
+                            label: '按钮修改',
+                            onClick: (e, props) => {
+                                console.log('消息通知');
+                                props.formStore.setValues({name: 'amis'});
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON);
+    })();
+</script>
+
+</html>
