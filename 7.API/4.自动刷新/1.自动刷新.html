@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.自动刷新</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "mode": "horizontal",
+                "title": "监听表单内部的修改",
+                "initApi": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/initData?tpl=${tpl}",
+                "actions": [],
+                "body": [
+                    {
+                        "label": "数据模板",
+                        "type": "select",
+                        "labelClassName": "text-muted",
+                        "name": "tpl",
+                        "value": "tpl1",
+                        "inline": true,
+                        "options": [
+                            {
+                                "label": "模板1",
+                                "value": "tpl1"
+                            },
+                            {
+                                "label": "模板2",
+                                "value": "tpl2"
+                            },
+                            {
+                                "label": "模板3",
+                                "value": "tpl3"
+                            }
+                        ],
+                        "description": "<span class=\"text-danger\">请修改这里看效果</span>"
+                    },
+                    {
+                        "label": "名称",
+                        "type": "static",
+                        "labelClassName": "text-muted",
+                        "name": "name"
+                    },
+                    {
+                        "label": "作者",
+                        "type": "static",
+                        "labelClassName": "text-muted",
+                        "name": "author"
+                    },
+                    {
+                        "label": "请求时间",
+                        "type": "static-datetime",
+                        "labelClassName": "text-muted",
+                        "format": "YYYY-MM-DD HH:mm:ss",
+                        "name": "date"
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

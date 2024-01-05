@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跟踪数据自动刷新</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "title": "",
+                    "type": "form",
+                    "mode": "horizontal",
+                    "body": [
+                        {
+                            "label": "选项1",
+                            "type": "radios",
+                            "name": "a",
+                            "inline": true,
+                            "options": [
+                                {
+                                    "label": "选项A",
+                                    "value": 1
+                                },
+                                {
+                                    "label": "选项B",
+                                    "value": 2
+                                },
+                                {
+                                    "label": "选项C",
+                                    "value": 3
+                                }
+                            ]
+                        },
+                        {
+                            "label": "选项2",
+                            "type": "select",
+                            "size": "sm",
+                            "name": "b",
+                            "source": {
+                                "method": "get",
+                                "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/options/level2?a=${a}",
+                                // "trackExpression": "${a}"
+                            },
+                            "description": "切换<code>选项1</code>的值，会触发<code>选项2</code>的<code>source</code> 接口重新拉取"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
