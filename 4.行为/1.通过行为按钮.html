@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过行为按钮</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root1" class="app-wrapper"></div>
+<div id="root2" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        amis.embed('#root1', {
+            "type": "page",
+            "body": {
+                type: 'action',
+                actionType: 'ajax',
+                api: 'https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm',
+                label: '发送 Ajax',
+            }
+        })
+
+        amis.embed('#root2', {
+            "type": "page",
+            "body": {
+                type: 'action',
+                actionType: 'dialog',
+                label: '弹个窗',
+                dialog: {
+                    title: '一个弹窗',
+                    body: 'Hello.'
+                }
+            }
+        })
+    })();
+</script>
+
+</html>
