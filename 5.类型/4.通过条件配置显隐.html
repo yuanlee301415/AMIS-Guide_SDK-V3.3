@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过条件配置显隐</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            data: {
+                limit: 3,
+            },
+            body: {
+                type: 'form',
+                body: [
+                    { type: 'input-number', label: 'Number', name: 'number', value: 1,  "description": "调整数量大小查看效果吧！" },
+                    { type: 'input-text', label: 'Text', name: 'text', hiddenOn: 'this.number >= this.limit', description: "当数量大于 ${limit} 的时候，该文本框会隐藏" },
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
