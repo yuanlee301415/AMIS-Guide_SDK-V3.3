@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>触发广播动作</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        // Todo: 3 个表单的数据未更新
+        const amisJSON = {
+            "type": "page",
+            debug: true,
+            "body": [
+                {
+                    "name": "role",
+                    "type": "select",
+                    "label": "广播一下",
+                    "mode": "row",
+                    "options": [
+                        {
+                            "label": "海贼王的男人",
+                            "value": "路飞"
+                        },
+                        {
+                            "label": "海上华佗",
+                            "value": "乔巴"
+                        },
+                        {
+                            "label": "海上食神",
+                            "value": "山治"
+                        }
+                    ],
+                    "onEvent": {
+                        "change": {
+                            "actions": [
+                                {
+                                    "actionType": "broadcast",
+                                    "args": {
+                                        "eventName": "broadcast_1"
+                                    },
+                                    "data": {
+                                        "myrole": "${role}",
+                                        "age": 18
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "form",
+                    "id": "form_001_form_01",
+                    "title": "表单1（优先级低）",
+                    "name": "sub-form1",
+                    "body": [
+                        {
+                            "type": "input-text",
+                            "label": "昵称",
+                            "name": "myname",
+                            "disabled": false,
+                            "mode": "horizontal"
+                        }
+                    ],
+                    "onEvent": {
+                        "broadcast_1": {
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    "data": {
+                                        "myname": "${myrole}"
+                                    }
+                                },
+                                {
+                                    "actionType": "toast",
+                                    "args": {
+                                        "msgType": "info",
+                                        "msg": "表单1刷新完成"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "form",
+                    "name": "form2",
+                    "id": "form_002",
+                    "title": "表单2（优先级中）",
+                    "body": [
+                        {
+                            "type": "input-text",
+                            "label": "角色",
+                            "name": "myrole",
+                            "disabled": false,
+                            "mode": "horizontal"
+                        },
+                        {
+                            "type": "input-text",
+                            "label": "年龄",
+                            "name": "age",
+                            "disabled": false,
+                            "mode": "horizontal"
+                        }
+                    ],
+                    "onEvent": {
+                        "broadcast_1": {
+                            "weight": 2,
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    "data": {
+                                        "myrole": "${myrole}",
+                                        "age": "${age}"
+                                    }
+                                },
+                                {
+                                    "actionType": "toast",
+                                    "args": {
+                                        "msgType": "info",
+                                        "msg": "表单2刷新完成"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "form",
+                    "name": "form3",
+                    "id": "form_003",
+                    "title": "表单3（优先级高）",
+                    "body": [
+                        {
+                            "type": "input-text",
+                            "id": "form_003_text_01",
+                            "label": "职业",
+                            "name": "job",
+                            "disabled": false,
+                            "mode": "horizontal"
+                        }
+                    ],
+                    "api": "https://api/form/form3",
+                    "onEvent": {
+                        "broadcast_1": {
+                            "weight": 3,
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    "data": {
+                                        "job": "${myrole}"
+                                    }
+                                },
+                                {
+                                    "actionType": "toast",
+                                    "args": {
+                                        "msgType": "info",
+                                        "msg": "表单3刷新完成"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

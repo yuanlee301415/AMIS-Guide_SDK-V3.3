@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.刷新输入类组件</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "type": "button",
+                    "label": "刷新下拉框",
+                    "className": "mb-2",
+                    "level": "primary",
+                    "onEvent": {
+                        "click": {
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    "componentId": "select-reload"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "form",
+                    "title": "表单",
+                    "body": [
+                        {
+                            "type": "select",
+                            "id": "select-reload",
+                            "name": "select",
+                            "label": "选项",
+                            "source": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/getOptions?waitSeconds=1"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

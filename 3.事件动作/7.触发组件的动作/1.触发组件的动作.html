@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>触发组件的动作</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "type": "button",
+                    "label": "选中【选项卡3】",
+                    "level": "primary",
+                    "className": "mr-3 mb-3",
+                    onEvent: {
+                        click: {
+                            actions: [
+                                {actionType: 'changeActiveKey', componentId: 'tabs-change-receiver', args: {activeKey: 3}}
+                            ]
+
+                        }
+                    }
+                },
+                {
+                    "id": "tabs-change-receiver",
+                    "type": "tabs",
+                    "mode": "line",
+                    "tabs": [
+                        {
+                            "title": "选项卡1",
+                            "body": "选项卡内容1"
+                        },
+                        {
+                            "title": "选项卡2",
+                            "body": "选项卡内容2"
+                        },
+                        {
+                            "title": "选项卡3",
+                            "body": "选项卡内容3"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

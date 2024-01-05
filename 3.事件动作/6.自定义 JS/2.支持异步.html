@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支持异步</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "type": "form",
+                    "title": "表单",
+                    "body": [
+                        {
+                            "label": "编号",
+                            "type": "input-text",
+                            "name": "pId",
+                            "id": "u:e47e2c8e6be8",
+                            "mode": "horizontal",
+                            "addOn": {
+                                "label": "自动获取",
+                                "type": "button",
+                                "onEvent": {
+                                    "click": {
+                                        "actions": [
+                                            {
+                                                "componentId": "u:52cd013e120f",
+                                                "actionType": "disabled"
+                                            },
+                                            {
+                                                "script": "return new Promise((resolve, reject) => {setTimeout(() => {event.setData({...event.data, pId: '01027359'});resolve();}, 3000)})",
+                                                "actionType": "custom"
+                                            },
+                                            {
+                                                "componentId": "u:e47e2c8e6be8",
+                                                "args": {
+                                                    "value": "${pId}"
+                                                },
+                                                "actionType": "setValue"
+                                            },
+                                            {
+                                                "componentId": "u:52cd013e120f",
+                                                "actionType": "enabled"
+                                            }
+                                        ],
+                                        "weight": 0
+                                    }
+                                },
+                                "id": "u:52cd013e120f"
+                            }
+                        }
+                    ],
+                    "apiFromAPICenter": false,
+                    "id": "u:76203156676b"
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

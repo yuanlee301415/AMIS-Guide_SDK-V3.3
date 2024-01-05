@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>引用 http 请求返回的数据</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "type": "button",
+                    "label": "发送Ajax请求，并把返回数据传给弹窗",
+                    "level": "primary",
+                    "onEvent": {
+                        "click": {
+                            "actions": [
+                                {
+                                    "actionType": "ajax",
+                                    "args": {
+                                        "api": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm"
+                                    }
+                                },
+                                {
+                                    "actionType": "dialog",
+                                    "data": {
+                                        "id": "${event.data.responseResult.responseData.id}"
+                                    },
+                                    "dialog": {
+                                        "type": "dialog",
+                                        "id": "dialog_005",
+                                        "title": "弹框标题1",
+                                        "data": {
+                                            "id": "${id}"
+                                        },
+                                        "body": [
+                                            {
+                                                "type": "form",
+                                                "body": [
+                                                    {
+                                                        "type": "tpl",
+                                                        "tpl": "<p>请求返回的数据：id=${id}</p>"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

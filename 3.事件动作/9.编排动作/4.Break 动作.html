@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Break 动作</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "wrapWithPanel": false,
+                "data": {
+                    "loopName": "loopData",
+                    "loopData": [
+                        {
+                            "name": "lv",
+                            "age": "19"
+                        },
+                        {
+                            "name": "xj",
+                            "age": "21"
+                        }
+                    ]
+                },
+                "body": [
+                    {
+                        "type": "button",
+                        "label": "只执行了第一个动作就跳出了循环",
+                        "level": "primary",
+                        "onEvent": {
+                            "click": {
+                                "actions": [
+                                    {
+                                        "actionType": "loop",
+                                        "args": {
+                                            "loopName": "${loopName}"
+                                        },
+                                        "children": [
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msgType": "success",
+                                                    "msg": "第 1 个动作",
+                                                    "position": "top-right"
+                                                }
+                                            },
+                                            {
+                                                "actionType": "break"
+                                            },
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msgType": "success",
+                                                    "msg": "第 2 个动作",
+                                                    "position": "top-right"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

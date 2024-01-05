@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "wrapWithPanel": false,
+                "data": {
+                    "expression": "okk",
+                    "name": "amis",
+                    "features": [
+                        "flexible",
+                        "powerful"
+                    ],
+                    "tool": "amis-editor",
+                    "platform": "aisuda",
+                    "detail": {
+                        "version": "2.8.0",
+                        "github": "https://github.com/baidu/amis"
+                    }
+                },
+                "body": [
+                    {
+                        "type": "button",
+                        "label": "符合条件的执行",
+                        "level": "primary",
+                        "onEvent": {
+                            "click": {
+                                "actions": [
+                                    {
+                                        "actionType": "toast",
+                                        "args": {
+                                            "msgType": "success",
+                                            "msg": "expression表达式 ok~"
+                                        },
+                                        "expression": "expression === \"okk\""
+                                    },
+                                    {
+                                        "actionType": "toast",
+                                        "args": {
+                                            "msg": "1"
+                                        },
+                                        "expression": "expression === \"nono\""
+                                    },
+                                    {
+                                        "actionType": "toast",
+                                        "args": {
+                                            "msgType": "success",
+                                            "msg": "conditin-builder条件组合 也ok~"
+                                        },
+                                        "expression": {
+                                            "id": "b6434ead40cc",
+                                            "conjunction": "and",
+                                            "children": [
+                                                {
+                                                    "id": "e92b93840f37",
+                                                    "left": {
+                                                        "type": "field",
+                                                        "field": "name"
+                                                    },
+                                                    "op": "equal",
+                                                    "right": "amis"
+                                                },
+                                                {
+                                                    "id": "3779845521db",
+                                                    "left": {
+                                                        "type": "field",
+                                                        "field": "features"
+                                                    },
+                                                    "op": "select_any_in",
+                                                    "right": "${[LAST(features)]}"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

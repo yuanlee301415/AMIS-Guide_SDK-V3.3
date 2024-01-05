@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上下文</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            data: {
+                p1: 'P1'
+            },
+            "body": {
+                type: 'form',
+                debug: true,
+                data: {
+                    job: 'HR'
+                },
+                "api": {
+                    "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm",
+                    "method": "post",
+                    "data": {
+                        "&": "$$",
+                        "job": "coder"
+                    }
+                },
+                body: [
+                    {
+                        "type": "alert",
+                        "body": "监听姓名值变化，执行动作时读取输入的内容；监听年龄值变化，执行动作时读取input-text组件当前数据域（表单数据）",
+                        "level": "info",
+                        "className": "mb-1"
+                    },
+                    {
+                        type: 'input-text',
+                        name: 'name',
+                        label: '姓名：',
+                        onEvent: {
+                            change: {
+                                actions: [
+                                    {actionType: 'toast', args: {msg: '姓名：${name}'}}
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        type: 'input-text',
+                        name: 'age',
+                        label: "年龄：",
+                        onEvent: {
+                            change: {
+                                actions: [
+                                    {actionType: 'toast', args: {msg: '${__rendererData | json}'}}
+                                ]
+                            }
+                        }
+                    }
+                ],
+                onEvent: {
+                    submitSucc: {
+                        actions: [
+                            {
+                                actionType: 'toast', args: {msg: 'event.data: ${event.data | json}'}
+                            },
+                            {
+                                actionType: 'toast', args: {msg: '__rendererData: ${__rendererData | json}'}
+                            }
+                        ]
+                    }
+                }
+            },
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

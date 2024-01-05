@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌套循环</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "wrapWithPanel": false,
+                "data": {
+                    "loopName": "loopData",
+                    "loopData": [
+                        {
+                            "name": "lv",
+                            "age": "19"
+                        },
+                        {
+                            "name": "xj",
+                            "age": "21"
+                        }
+                    ]
+                },
+                "body": [
+                    {
+                        "type": "button",
+                        "label": "循环",
+                        "className": "m-2",
+                        "onEvent": {
+                            "click": {
+                                "actions": [
+                                    {
+                                        "actionType": "loop",
+                                        "preventDefault": false,
+                                        "stopPropagation": false,
+                                        "args": {
+                                            "loopName": "${loopName}"
+                                        },
+                                        "children": [
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msg": "第1层循环动作1${name}"
+                                                },
+                                                "preventDefault": false,
+                                                "stopPropagation": false
+                                            },
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msg": "第1层循环动作2${name}"
+                                                }
+                                            },
+                                            {
+                                                "actionType": "loop",
+                                                "args": {
+                                                    "loopName": "${loopName}"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "actionType": "toast",
+                                                        "args": {
+                                                            "msg": "第2层循环动作1${name}"
+                                                        }
+                                                    },
+                                                    {
+                                                        "actionType": "toast",
+                                                        "args": {
+                                                            "msg": "第2层循环动作2${name}"
+                                                        },
+                                                        "preventDefault": false,
+                                                        "stopPropagation": false
+                                                    },
+                                                    {
+                                                        "actionType": "continue"
+                                                    },
+                                                    {
+                                                        "actionType": "toast",
+                                                        "args": {
+                                                            "msg": "第2层循环动作3${name}"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

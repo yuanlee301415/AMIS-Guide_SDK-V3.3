@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更新表单数据</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "title": "更新表单数据",
+            "data": {
+                "globalData": {
+                    "myrole": "法官",
+                    "mymsg": "该吃饭了!"
+                }
+            },
+            "body": [
+                {
+                    "type": "button",
+                    "label": "更新",
+                    "level": "primary",
+                    "className": "mb-2",
+                    "onEvent": {
+                        "click": {
+                            "actions": [
+                                {
+                                    "actionType": "setValue",
+                                    "componentId": "form_data",
+                                    "args": {
+                                        "value": "${globalData}"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "form",
+                    "id": "form_data",
+                    "title": "表单",
+                    "debug": true,
+                    "data": {
+                        "myrole": "预言家",
+                        "age": "18"
+                    },
+                    "body": [
+                        {
+                            "type": "input-text",
+                            "label": "角色",
+                            "name": "myrole",
+                            "disabled": false,
+                            "mode": "horizontal"
+                        },
+                        {
+                            "type": "input-text",
+                            "label": "年龄",
+                            "name": "age",
+                            "disabled": false,
+                            "mode": "horizontal"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

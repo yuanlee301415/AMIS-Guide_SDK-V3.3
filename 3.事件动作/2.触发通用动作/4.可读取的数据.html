@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可读取的数据</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "type": "button",
+                    "label": "表单外的校验按钮",
+                    "className": "mb-2",
+                    "level": "primary",
+                    "onEvent": {
+                        "click": {
+                            "actions": [
+                                {
+                                    "componentId": "form_validate",
+                                    "outputVar": "validateResult",
+                                    "actionType": "validate"
+                                },
+                                {
+                                    "outputVar": "responseResult",
+                                    "actionType": "ajax",
+                                    "api": {
+                                        "method": "post",
+                                        "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm",
+                                        "data": {
+                                            "name": "${name}",
+                                            "email": "${email}"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "id": "u:bd7adb583ec8"
+                },
+                {
+                    "type": "form",
+                    "id": "form_validate",
+                    "body": [
+                        {
+                            "type": "input-text",
+                            "name": "name",
+                            "label": "姓名：",
+                            "required": true,
+                            "id": "u:fbbc02500df6"
+                        },
+                        {
+                            "name": "email",
+                            "type": "input-text",
+                            "label": "邮箱：",
+                            "required": true,
+                            "validations": {
+                                "isEmail": true
+                            },
+                            "id": "u:830d0bad3e6a"
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "type": "button",
+                            "label": "表单内的校验按钮",
+                            "level": "primary",
+                            "onEvent": {
+                                "click": {
+                                    "actions": [
+                                        {
+                                            "componentId": "form_validate",
+                                            "outputVar": "validateResult",
+                                            "actionType": "validate"
+                                        },
+                                        {
+                                            "outputVar": "responseResult",
+                                            "actionType": "ajax",
+                                            "api": {
+                                                "method": "post",
+                                                "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm",
+                                                "data": {
+                                                    "name": "${name}",
+                                                    "email": "${email}"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "id": "u:bd7adb583ec8"
+                        }
+                    ]
+                }
+            ],
+            "id": "u:d79af3431de1"
+        };
+
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

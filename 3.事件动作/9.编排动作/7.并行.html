@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>并行</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        // Todo: 为什么只发送 2 个请求
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "wrapWithPanel": false,
+                "data": {
+                    "name": "lvxj",
+                    "age": "kkkk"
+                },
+                "body": [
+                    {
+                        "type": "button",
+                        "label": "同时发送2个ajax请求，并显示请求返回",
+                        "level": "primary",
+                        "onEvent": {
+                            "click": {
+                                "actions": [
+                                    {
+                                        "actionType": "parallel",
+                                        "children": [
+                                            {
+                                                "actionType": "ajax",
+                                                "args": {
+                                                    "api": {
+                                                        "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/initData?name=${name}",
+                                                        "method": "get"
+                                                    },
+                                                    "messages": {
+                                                        "success": "请求1成功了！欧耶",
+                                                        "failed": "失败了呢。。"
+                                                    }
+                                                },
+                                                "outputVar": "var1"
+                                            },
+                                            {
+                                                "actionType": "ajax",
+                                                "args": {
+                                                    "api": {
+                                                        "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm?name=${name}",
+                                                        "method": "get"
+                                                    },
+                                                    "messages": {
+                                                        "success": "请求2成功了！欧耶",
+                                                        "failed": "失败了呢。。"
+                                                    }
+                                                },
+                                                "outputVar": "var2"
+                                            },
+                                            {
+                                                "actionType": "ajax",
+                                                "args": {
+                                                    "api": {
+                                                        "url": "https://3xsw4ap8wah59.cfc-execute.bj.baidubce.com/api/amis-mock/mock2/form/saveForm?name=${name}",
+                                                        "method": "get"
+                                                    },
+                                                    "messages": {
+                                                        "success": "请求3成功了！欧耶",
+                                                        "failed": "失败了呢。。"
+                                                    }
+                                                },
+                                                "outputVar": "var3"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "actionType": "toast",
+                                        "args": {
+                                            "msg": "var1:${event.data.var1|json}, var2:${event.data.var2|json}, var3:${event.data.var3|json}"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

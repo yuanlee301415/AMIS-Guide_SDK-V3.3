@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排他（switch）</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "wrapWithPanel": false,
+                "data": {
+                    "branchCont": 18
+                },
+                "body": [
+                    {
+                        "type": "button",
+                        "label": "只执行动作2",
+                        "level": "primary",
+                        "onEvent": {
+                            "click": {
+                                "actions": [
+                                    {
+                                        "actionType": "switch",
+                                        "children": [
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msgType": "info",
+                                                    "msg": "动作1",
+                                                    "position": "top-right"
+                                                },
+                                                "expression": "this.branchCont > 19",
+                                                "stopPropagation": true
+                                            },
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msgType": "info",
+                                                    "msg": "动作2",
+                                                    "position": "top-right"
+                                                },
+                                                "expression": "this.branchCont > 17"
+                                            },
+                                            {
+                                                "actionType": "toast",
+                                                "args": {
+                                                    "msgType": "info",
+                                                    "msg": "动作3",
+                                                    "position": "top-right"
+                                                },
+                                                "expression": "this.branchCont > 16"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

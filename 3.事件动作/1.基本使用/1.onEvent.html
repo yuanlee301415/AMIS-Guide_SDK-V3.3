@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onEvent</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            title: 'onEvent',
+            body: {
+                type: 'button',
+                label: '单击/滑入/滑出',
+                level: 'primary',
+                onEvent: {
+                    click: {
+                        actions: [
+                            {
+                                actionType: 'toast',
+                                args: {
+                                    msgType: 'info',
+                                    msg: '点击事件'
+                                }
+                            }
+                        ]
+                    },
+                    mouseenter: {
+                        actions: [
+                            {
+                                actionType: 'toast',
+                                args: {
+                                    msgType: 'info',
+                                    msg: '滑入事件'
+                                }
+                            }
+                        ]
+                    },
+                    mouseleave: {
+                        actions: [
+                            {
+                                actionType: 'toast',
+                                args: {
+                                    msgType: 'info',
+                                    msg: '滑出事件'
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
