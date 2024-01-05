@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClassName</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const CONST = {
+            options: {
+                0: '离线',
+                1: '在线'
+            }
+        }
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            debug: true,
+            body: [
+                {
+                    type: 'radios', name: 'status', label: '状态', value: '1', options: CONST.options
+                },
+                {
+                    type: 'mapping',
+                    name: 'status',
+                    map: CONST.options,
+                    className: {
+                        'text-success': 'status === "1"',
+                        'text-muted': 'status === "0"',
+                    }
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
