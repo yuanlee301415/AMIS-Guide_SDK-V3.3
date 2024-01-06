@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control 表单项包裹</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "mode": "horizontal",
+                "body": [
+                    {
+                        "type": "input-text",
+                        "label": "文本输入"
+                    },
+                    {
+                        "type": "control",
+                        "label": "图片",
+                        "body": [
+                            {
+                                "type": "image",
+                                "src": "https://internal-amis-res.cdn.bcebos.com/images/2020-1/1578395692722/4f3cb4202335.jpeg@s_0,w_216,l_1,f_jpg,q_80"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "control",
+                        "label": "二维码",
+                        "description": "还可以来点描述",
+                        "body": [
+                            {
+                                "type": "qr-code",
+                                "codeSize": 128,
+                                "backgroundColor": "#108cee",
+                                "foregroundColor": "#000",
+                                "value": "https://www.baidu.com"
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义 label 宽度</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "title": "label对齐模式",
+                "mode": "horizontal",
+                "labelWidth": 120,
+                "body": [
+                    {
+                        "type": "input-email",
+                        "name": "email",
+                        "label": "邮箱",
+                        "labelWidth": 200,
+                        "required": true
+                    },
+                    {
+                        "type": "input-password",
+                        "name": "password",
+                        "label": "密码",
+                        "required": true
+                    },
+                    {
+                        "type": "input-text",
+                        "name": "address",
+                        "label": "地址",
+                        "mode": "inline"
+                    },
+                    {
+                        "type": "input-text",
+                        "name": "mailCode",
+                        "label": "邮编",
+                        "mode": "inline",
+                        "labelWidth": 80
+                    },
+                    {
+                        "type": "radios",
+                        "name": "mailCode",
+                        "label": "性别",
+                        "mode": "row",
+                        "options": [
+                            {
+                                "label": "Male",
+                                "value": "male"
+                            },
+                            {
+                                "label": "Female",
+                                "value": "female"
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

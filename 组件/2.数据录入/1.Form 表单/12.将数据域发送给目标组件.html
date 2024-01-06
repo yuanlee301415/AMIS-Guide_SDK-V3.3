@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>将数据域发送给目标组件</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    "type": "form",
+                    "target": "detailForm",
+                    "body": [
+                        {
+                            "type": "input-text",
+                            "placeholder": "关键字",
+                            "name": "keywords"
+                        }
+                    ]
+                },
+                {
+                    "type": "form",
+                    "name": "detailForm",
+                    "body": [
+                        {
+                            "label": "名称",
+                            "type": "static",
+                            "name": "name"
+                        },
+                        {
+                            "label": "作者",
+                            "type": "static",
+                            "name": "author"
+                        },
+                        {
+                            "label": "关键字",
+                            "type": "static",
+                            "name": "keywords"
+                        },
+                        {
+                            "label": "请求时间",
+                            "type": "static-datetime",
+                            "format": "YYYY-MM-DD HH:mm:ss",
+                            "name": "date"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
