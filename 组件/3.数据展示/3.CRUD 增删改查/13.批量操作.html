@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>批量操作</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper" style="padding: 200px 0;"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "crud",
+                "syncLocation": false,
+                "api": BASE_URL + "/amis/api/mock2/sample",
+                "headerToolbar": [
+                    'bulkActions'
+                ],
+                bulkActions: [
+                    {
+                        type: 'button',
+                        label: '批量删除',
+                        level: 'danger',
+                        actionType: 'ajax',
+                        confirmText: '确定要批量删除吗？',
+                        api: {
+                            method: 'delete',
+                            "url": BASE_URL+"/amis/api/mock2/sample/${ids|raw}",
+                        }
+                    },
+                    {
+                        type: 'button',
+                        label: '批量修改',
+                        level: 'info',
+                        actionType: 'dialog',
+                        dialog: {
+                            title: '批量编辑',
+                            body: {
+                                type: 'form',
+                                "api": BASE_URL+"/amis/api/mock2/sample/bulkUpdate2",
+                                body: [
+                                    { type: 'hidden', name: 'ids'},
+                                    { type: 'input-text', label: 'Engine', name: 'engine'}
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "columns": [
+                    {
+                        "name": "id",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "engine",
+                        "label": "Rendering engine"
+                    },
+                    {
+                        "name": "browser",
+                        "label": "Browser"
+                    },
+                    {
+                        "name": "platform",
+                        "label": "Platform(s)"
+                    },
+                    {
+                        "name": "version",
+                        "label": "Engine version"
+                    },
+                    {
+                        "name": "grade",
+                        "label": "CSS grade"
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

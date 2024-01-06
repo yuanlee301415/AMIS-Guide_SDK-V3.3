@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>固定表头</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "service",
+                "api": BASE_URL+"/amis/api/sample?perPage=10",
+                "body": [
+                    {
+                        "type": "table2",
+                        "source": "$rows",
+                        "scroll": {
+                            "y": 200
+                        },
+                        "columns": [
+                            {
+                                "title": "Engine",
+                                "name": "engine"
+                            },
+                            {
+                                "title": "Grade",
+                                "name": "grade"
+                            },
+                            {
+                                "title": "Platform",
+                                "name": "platform"
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

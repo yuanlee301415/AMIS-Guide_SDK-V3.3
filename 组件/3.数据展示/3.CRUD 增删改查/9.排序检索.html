@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排序检索</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper" style="padding: 200px 0;"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "crud",
+                "syncLocation": false,
+                "api": BASE_URL+"/amis/api/mock2/sample",
+                "columns": [
+                    {
+                        "name": "id",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "engine",
+                        "label": "Rendering engine",
+                        sortable: true,
+                    },
+                    {
+                        "name": "browser",
+                        "label": "Browser",
+                        sortable: true,
+                    },
+                    {
+                        "name": "platform",
+                        "label": "Platform(s)"
+                    },
+                    {
+                        "name": "version",
+                        "label": "Engine version",
+                        sortable: true,
+                    },
+                    {
+                        "name": "grade",
+                        "label": "CSS grade"
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
