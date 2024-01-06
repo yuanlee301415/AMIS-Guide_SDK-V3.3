@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temp</title>
-    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <title>动态渲染页面</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
     <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
@@ -22,8 +22,11 @@
     (function () {
         const amis = amisRequire('amis/embed');
         const amisJSON = {
-            type: 'page',
-            title: 'Temp',
+            "type": "page",
+            "body": {
+                "type": "service",
+                "schemaApi": BASE_URL+"/amis/api/mock2/service/schema?type=tabs"
+            }
         };
         amis.embed('#root', amisJSON)
     })();

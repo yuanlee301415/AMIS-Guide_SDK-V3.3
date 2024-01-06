@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请求成功后，刷新目标组件</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const GET_SAMPLE_API = 'https://aisuda.bce.baidu.com/amis/api/mock2/sample?waitSeconds=1'
+        const SAVE_FORM_API = 'https://aisuda.bce.baidu.com/amis/api/mock2/form/saveForm'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            body: [
+                {
+                    type: 'button',
+                    label: 'Ajax 请求',
+                    actionType: 'ajax',
+                    reload: 'crud-1',
+                    "api": SAVE_FORM_API,
+                },
+                {
+                    "type": "divider"
+                },
+                {
+                    type: 'crud',
+                    name: 'crud-1',
+                    "api":  GET_SAMPLE_API,
+                    "columns": [
+                        {
+                            "name": "id",
+                            "label": "ID"
+                        },
+                        {
+                            "name": "engine",
+                            "label": "Rendering engine"
+                        },
+                        {
+                            "name": "browser",
+                            "label": "Browser"
+                        },
+                        {
+                            "name": "platform",
+                            "label": "Platform(s)"
+                        },
+                        {
+                            "name": "version",
+                            "label": "Engine version"
+                        },
+                        {
+                            "name": "grade",
+                            "label": "CSS grade"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temp</title>
-    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <title>自定义点击事件</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
     <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
@@ -22,8 +22,12 @@
     (function () {
         const amis = amisRequire('amis/embed');
         const amisJSON = {
-            type: 'page',
-            title: 'Temp',
+            "type": "page",
+            "body": {
+                "label": "点击",
+                "type": "button",
+                "onClick": "props.onAction(event, {actionType:'dialog', dialog: {title: '弹框', body: '这是代码调用的弹框'}})"
+            }
         };
         amis.embed('#root', amisJSON)
     })();

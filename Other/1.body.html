@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temp</title>
+    <title>body</title>
     <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
     <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
     <script src="/node_modules/amis/sdk/sdk.js"></script>
     <script>
-        const BASE_URL = 'https://aisuda.bce.baidu.com'
         window.enableAMISDebug = true;
     </script>
 </head>
@@ -23,7 +22,15 @@
         const amis = amisRequire('amis/embed');
         const amisJSON = {
             type: 'page',
-            title: 'Temp',
+            title: 'Body',
+            body: [
+                'A',
+                'B',
+                'C',
+                11,
+                22,
+                33
+            ]
         };
         amis.embed('#root', amisJSON)
     })();

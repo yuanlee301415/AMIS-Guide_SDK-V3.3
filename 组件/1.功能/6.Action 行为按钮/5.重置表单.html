@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.重置表单</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "api": "/amis/api/mock2/form/saveForm",
+                data: {
+                    username: 'aa',
+                    password: 'bb',
+                    rememberMe: true
+                },
+                "body": [
+                    {
+                        "type": "input-text",
+                        "name": "username",
+                        "placeholder": "请输入用户名",
+                        "label": "用户名"
+                    },
+                    {
+                        "type": "input-password",
+                        "name": "password",
+                        "label": "密码",
+                        "placeholder": "请输入密码"
+                    },
+                    {
+                        "type": "checkbox",
+                        "name": "rememberMe",
+                        "option": "记住登录"
+                    }
+                ],
+                "actions": [
+                    {
+                        "type": "reset",
+                        "label": "重置"
+                    },
+                    {
+                        "type": "submit",
+                        "label": "提交",
+                        "level": "primary"
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

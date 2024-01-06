@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹框</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "name": "form-1",
+                "body": [
+                    {
+                        "type": "select",
+                        "name": "group",
+                        "label": "分组",
+                        "source": BASE_URL+"/amis/api/mock2/form/getOptions"
+                    },
+                    {
+                        "label": "新增分组",
+                        "type": "button",
+                        "level": "primary",
+                        "actionType": "dialog",
+                        "reload": "form-1.group",
+                        "dialog": {
+                            "title": "新增分组",
+                            "body": {
+                                "type": "form",
+                                "api": BASE_URL+"/amis/api/mock2/form/saveForm",
+                                "body": [
+                                    {
+                                        "type": "input-text",
+                                        "name": "groupName",
+                                        "label": "分组名"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

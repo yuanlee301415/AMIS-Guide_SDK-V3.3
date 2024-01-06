@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temp</title>
-    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <title>调用外部函数获取数据</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
     <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
@@ -22,8 +22,15 @@
     (function () {
         const amis = amisRequire('amis/embed');
         const amisJSON = {
-            type: 'page',
-            title: 'Temp',
+            "type": "page",
+            "body": {
+                "type": "service",
+                "dataProvider": "setData({ now: new Date().toString() })",
+                "body": {
+                    "type": "tpl",
+                    "tpl": "现在是：${now}"
+                }
+            }
         };
         amis.embed('#root', amisJSON)
     })();

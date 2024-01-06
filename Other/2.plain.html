@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temp</title>
+    <title>plain</title>
     <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
     <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
     <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
     <script src="/node_modules/amis/sdk/sdk.js"></script>
     <script>
-        const BASE_URL = 'https://aisuda.bce.baidu.com'
         window.enableAMISDebug = true;
     </script>
 </head>
 
 <body>
+<pre>type: plain
+数字不显示
+</pre>
 <div id="root" class="app-wrapper"></div>
 </body>
 
@@ -23,7 +25,13 @@
         const amis = amisRequire('amis/embed');
         const amisJSON = {
             type: 'page',
-            title: 'Temp',
+            title: 'plain',
+            body: [
+                { type: 'plain', text: 'A' },
+                { type: 'plain', text: 'B' },
+                { type: 'plain', text: 11 },
+                { type: 'plain', text: 22 },
+            ]
         };
         amis.embed('#root', amisJSON)
     })();

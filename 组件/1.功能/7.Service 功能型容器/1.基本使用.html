@@ -22,8 +22,16 @@
     (function () {
         const amis = amisRequire('amis/embed');
         const amisJSON = {
-            type: 'page',
-            title: 'Temp',
+            "type": "page",
+            "body": {
+                "type": "service",
+                "api": BASE_URL+"/amis/api/mock2/page/initData",
+                "body": {
+                    "type": "panel",
+                    "title": "$title",
+                    "body": "现在是：${date}"
+                }
+            }
         };
         amis.embed('#root', amisJSON)
     })();

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴模式</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "collapse-group",
+                "activeKey": [
+                    "1"
+                ],
+                "accordion": true,
+                "body": [
+                    {
+                        "type": "collapse",
+                        "key": "1",
+                        "header": "标题1",
+                        "body": "这里是内容1"
+                    },
+                    {
+                        "type": "collapse",
+                        "key": "2",
+                        "header": "标题2",
+                        "body": "这里是内容2"
+                    },
+                    {
+                        "type": "collapse",
+                        "key": "3",
+                        "header": "标题3",
+                        "body": "这里是内容3"
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
