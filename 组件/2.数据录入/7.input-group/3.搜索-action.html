@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索-action</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper" style="padding: 200px 0;"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            body: [
+                {
+                    type: 'service',
+                    "api": {
+                        "method": "get",
+                        "url": BASE_URL + "/amis/api/mock2/sample?perPage=5",
+                        "data": {
+                            keywords: '${keywords}'
+                        },
+                    },
+                    id: 'serviceA',
+                    body: [
+                        {
+                            "type": "input-group",
+                            "name": "input-group",
+                            "label": "input 组合",
+                            "body": [
+                                {
+                                    "type": "input-text",
+                                    "placeholder": "搜索作业ID/名称",
+                                    "inputClassName": "b-r-none p-r-none",
+                                    "name": "keywords"
+                                },
+                                {
+                                    "type": "action",
+                                    "label": "搜索",
+                                    actionType: 'reload',
+                                    target: 'serviceA'
+                                }
+                            ]
+                        },
+                        {
+                            type: 'table',
+                            source: '$rows',
+                            columns: [
+                                {
+                                    "name": "id",
+                                    "label": "ID"
+                                },
+                                {
+                                    "name": "engine",
+                                    "label": "Rendering engine"
+                                },
+                                {
+                                    "name": "browser",
+                                    "label": "Browser"
+                                },
+                                {
+                                    "name": "platform",
+                                    "label": "Platform(s)"
+                                },
+                                {
+                                    "name": "version",
+                                    "label": "Engine version"
+                                },
+                                {
+                                    "name": "grade",
+                                    "label": "CSS grade"
+                                },
+                                {
+                                    "type": "operation",
+                                    "label": "操作",
+                                    buttons: [
+                                        {
+                                            label: '详情',
+                                            type: 'button',
+                                            level: 'link',
+                                            actionType: 'dialog',
+                                            dialog: {
+                                                title: '查看详情',
+                                                body: {
+                                                    type: 'form',
+                                                    body: [
+                                                        {type: 'input-text', name: 'engine', label: 'Engine'},
+                                                        {type: 'input-text', name: 'browser', label: 'Browser'},
+                                                        {type: 'input-text', name: 'platform', label: 'Platform'},
+                                                        {type: 'input-text', name: 'version', label: 'Version'},
+                                                        {
+                                                            type: 'control', label: 'grade', body: {
+                                                                type: 'tag',
+                                                                label: '${grade}',
+                                                                displayMode: 'normal',
+                                                                color: 'active'
+                                                            }
+                                                        },
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            label: '删除',
+                                            level: 'link',
+                                            type: 'button',
+                                            className: 'text-danger',
+                                            disabledOn: 'this.grade === "A"'
+                                        }
+                                    ]
+                                },
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
