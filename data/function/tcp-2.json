@@ -1,0 +1,19 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "id": "TCP-2",
+    "functionType": "TCP",
+    "period": "5",
+    "param": {
+      "check": {
+        "state": "responseCode",
+        "condition": "<",
+        "value": "2"
+      },
+      "ip": "host-2",
+      "port": "port-2"
+    },
+    "functionName": "tcp-2"
+  }
+}

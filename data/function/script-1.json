@@ -1,0 +1,12 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "id": "script-1",
+    "functionType": "SCRIPT",
+    "period": "5",
+    "param": {
+      "script": "script-1:alert(1)"
+    },
+    "functionName": "script-1"
+  }}

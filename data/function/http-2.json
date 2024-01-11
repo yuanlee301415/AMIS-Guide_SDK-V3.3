@@ -1,0 +1,34 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "id": "http-2",
+    "functionType": "HTTP-API",
+    "period": "10",
+    "param": [
+      {
+        "apiType": "get",
+        "check": {
+          "prop": "responseCode",
+          "condition": "=",
+          "value": "200"
+        },
+        "address": "http-2-get-url",
+        "head": "http-2-head-1",
+        "params": "http-2-param-1"
+      },
+      {
+        "apiType": "post",
+        "check": {
+          "prop": "responseBody",
+          "condition": "=",
+          "value": "http-2-post-1-body"
+        },
+        "address": "http-2-post-url-1",
+        "head": "http-2-post-head-1",
+        "params": "http-2-post-params-1"
+      }
+    ],
+    "functionName": "http-2"
+  }
+}
