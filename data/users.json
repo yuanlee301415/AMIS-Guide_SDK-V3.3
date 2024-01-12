@@ -1,0 +1,33 @@
+{
+  "status": 0,
+  "msg": "ok",
+  "data": {
+    "options": [
+      {
+        "name": "诸葛亮",
+        "id": "zhugeliang"
+      },
+      {
+        "name": "曹操",
+        "id": "caocao"
+      },
+      {
+        "name": "钟无艳",
+        "id": "zhongwuyan"
+      },
+      {
+        "name": "李白",
+        "id": "libai"
+      },
+      {
+        "name": "韩信",
+        "id": "hanxin"
+      },
+      {
+        "name": "云中君",
+        "id": "yunzhongjun"
+      }
+    ],
+    "value": ["zhugeliang", "zhongwuyan", "yunzhongjun"]
+  }
+}

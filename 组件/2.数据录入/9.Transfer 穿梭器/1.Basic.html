@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.Basic</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "api": "/amis/api/mock2/form/saveForm",
+                data: {
+                    a: Date.now(),
+                    b: Math.random()
+                },
+                "body": [
+                    {
+                        "label": "默认",
+                        "type": "transfer",
+                        "name": "ids",
+                        "value": "zhugeliang,libai",
+                        "options": [
+                            {
+                                "label": "诸葛亮",
+                                "value": "zhugeliang"
+                            },
+                            {
+                                "label": "曹操",
+                                "value": "caocao"
+                            },
+                            {
+                                "label": "钟无艳",
+                                "value": "zhongwuyan"
+                            },
+                            {
+                                "label": "李白",
+                                "value": "libai"
+                            },
+                            {
+                                "label": "韩信",
+                                "value": "hanxin"
+                            },
+                            {
+                                "label": "云中君",
+                                "value": "yunzhongjun"
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
