@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.长度</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "form",
+                "mode": "horizontal",
+                "body": [
+                    {
+                        "label": "名称",
+                        "type": "input-text",
+                        "name": "name",
+                        "required": true,
+                        maxLength: 10
+                    },
+                    {
+                        "label": "负责人",
+                        "type": "select",
+                        "name": "owner",
+                        source: '/data/users.json',
+                        labelField: 'name',
+                        valueField: 'id',
+                        "required": true
+                    },
+                    {
+                        "label": "手机号",
+                        "type": "input-text",
+                        "name": "mobile"
+                    },
+                    {
+                        "label": "描述",
+                        "type": "textarea",
+                        "name": "desc",
+                        maxLength: 20
+                    }
+                ]
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
