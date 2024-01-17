@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.发送-id-无数据</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            title: '7.发送-id-无数据',
+            debug: true,
+            body: [
+                {
+                    type: 'service',
+                    api: '/data/empty.json',
+                    body: {
+                        debug: true,
+                        "type": "collapse-group",
+                        activeKey: ['1'],
+                        "accordion": true,
+                        body: {
+                            type: 'each',
+                            source: '${tasks}',
+                            items: {
+                                "type": "collapse",
+                                "key": "${id}",
+                                "header": "${name}",
+                                "body": {
+                                    type: 'flex',
+                                    "items": [
+                                        {
+                                            "type": "button",
+                                            "label": "编辑",
+                                            level: 'info',
+                                            actionType: 'dialog',
+                                            dialog: {
+                                                title: '编辑',
+                                                body: {
+                                                    type: 'service',
+                                                    body: {
+                                                        type: 'form',
+                                                        debug: true,
+                                                        "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
+                                                        body: [
+                                                            {
+                                                                "type": "input-text",
+                                                                "name": "name",
+                                                                "required": true,
+                                                                "label": "名称：",
+                                                                value: '${name}'
+                                                            },
+                                                            {
+                                                                "type": "select",
+                                                                "name": "owner",
+                                                                "required": true,
+                                                                "label": "运维人：",
+                                                                value: '${owner}'
+                                                            },
+                                                        ],
+                                                        actions: []
+                                                    }
+
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "button",
+                                            "label": "删除",
+                                            level: 'danger'
+                                        },
+                                    ]
+                                }
+                            },
+                        }
+                    },
+                    "onEvent": {
+                        "fetchInited": {
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    componentId: 'taskCRUD',
+                                    "data": {
+                                        taskId: '${tasks[0].id}'
+                                    }
+                                },
+                                {
+                                    "actionType": "reload",
+                                    componentId: 'sampleCRUD',
+                                    "data": {
+                                        taskId: '${tasks[0].id}'
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+
+                {
+                    id: 'taskCRUD',
+                    type: 'crud',
+                    api: '/data/task/tasks.json',
+                    columns: [
+                        { label: 'ID', value: 'id' },
+                        { label: 'Name', value: 'name' },
+                        { label: 'Owner', value: 'owner' },
+                    ]
+                },
+                {
+                    type: 'crud',
+                    id: 'sampleCRUD',
+                    api: '/data/sample.json',
+                    columns: [
+                        { name: 'id', label: 'ID' },
+                        { name: 'engine', label: 'Engine' },
+                        { name: 'browser', label: 'Browser' },
+                        { name: 'platform', label: 'Platform' },
+                        { name: 'version', label: 'Version' }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
