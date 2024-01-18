@@ -5,27 +5,33 @@
     "options": [
       {
         "name": "诸葛亮",
-        "id": "zhugeliang"
+        "id": "zhugeliang",
+        "mobile": 13000000001
       },
       {
         "name": "曹操",
-        "id": "caocao"
+        "id": "caocao",
+        "mobile": 13000000002
       },
       {
         "name": "钟无艳",
-        "id": "zhongwuyan"
+        "id": "zhongwuyan",
+        "mobile": 13000000003
       },
       {
         "name": "李白",
-        "id": "libai"
+        "id": "libai",
+        "mobile": 13000000004
       },
       {
         "name": "韩信",
-        "id": "hanxin"
+        "id": "hanxin",
+        "mobile": 13000000005
       },
       {
         "name": "云中君",
-        "id": "yunzhongjun"
+        "id": "yunzhongjun",
+        "mobile": 13000000006
       }
     ],
     "value": ["zhugeliang", "zhongwuyan", "yunzhongjun"]
