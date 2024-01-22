@@ -1,0 +1,24 @@
+{
+  "status": 0,
+  "msg": "ok",
+  "data": [
+    {
+      "type": "collapse",
+      "key": "1",
+      "header": "任务-1",
+      "body": {
+        "type": "tpl",
+        "tpl": "ID: 1, Owner: Admin"
+      }
+    },
+    {
+      "type": "collapse",
+      "key": "1",
+      "header": "任务-1",
+      "body": {
+        "type": "tpl",
+        "tpl": "ID: 1, Owner: Admin"
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "status": 0,
+  "msg": "ok",
+  "data": {
+    "type": "collapse-group",
+    "activeKey": [
+      "1"
+    ],
+    "accordion": true,
+    "body": [
+      {
+        "type": "collapse",
+        "key": "1",
+        "header": "Task-1",
+        "body": [
+          {
+            "type": "tpl",
+            "tpl": "Owner: UserA"
+          },
+          {
+            "type": "flex",
+            "items": [
+              {
+                "type": "button",
+                "label": "编辑",
+                "level": "info",
+                "actionType": "dialog",
+                "dialog": {
+                  "title": "编辑",
+                  "body": {
+                    "type": "service",
+                    "body": {
+                      "type": "form",
+                      "debug": true,
+                      "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "name",
+                          "required": true,
+                          "label": "名称：",
+                          "value": "Task-1"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "owner",
+                          "label": "运维人：",
+                          "value": "UserA"
+                        }
+                      ],
+                      "actions": []
+                    }
+                  }
+                }
+              },
+              {
+                "type": "button",
+                "label": "删除",
+                "level": "danger"
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "collapse",
+        "key": "2",
+        "header": "Task-2",
+        "body": [
+          {
+            "type": "tpl",
+            "tpl": "Owner: UserB"
+          },
+          {
+            "type": "flex",
+            "items": [
+              {
+                "type": "button",
+                "label": "编辑",
+                "level": "info",
+                "actionType": "dialog",
+                "dialog": {
+                  "title": "编辑",
+                  "body": {
+                    "type": "service",
+                    "body": {
+                      "type": "form",
+                      "debug": true,
+                      "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "name",
+                          "required": true,
+                          "label": "名称：",
+                          "value": "Task-2"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "owner",
+                          "label": "运维人：",
+                          "value": "UserB"
+                        }
+                      ],
+                      "actions": []
+                    }
+                  }
+                }
+              },
+              {
+                "type": "button",
+                "label": "删除",
+                "level": "danger"
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "type": "collapse",
+        "key": "3",
+        "header": "Task-3",
+        "body": [
+          {
+            "type": "tpl",
+            "tpl": "Owner: UserC"
+          },
+          {
+            "type": "flex",
+            "items": [
+              {
+                "type": "button",
+                "label": "编辑",
+                "level": "info",
+                "actionType": "dialog",
+                "dialog": {
+                  "title": "编辑",
+                  "body": {
+                    "type": "service",
+                    "body": {
+                      "type": "form",
+                      "debug": true,
+                      "api": "/amis/api/mock2/form/saveForm?waitSeconds=2",
+                      "body": [
+                        {
+                          "type": "input-text",
+                          "name": "name",
+                          "required": true,
+                          "label": "名称：",
+                          "value": "Task-3"
+                        },
+                        {
+                          "type": "input-text",
+                          "name": "owner",
+                          "label": "运维人：",
+                          "value": "UserC"
+                        }
+                      ],
+                      "actions": []
+                    }
+                  }
+                }
+              },
+              {
+                "type": "button",
+                "label": "删除",
+                "level": "danger"
+              }
+            ]
+          }
+        ]
+      }
+
+    ]
+  }
+
+}
