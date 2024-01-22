@@ -13,6 +13,8 @@
     "live-server": "^1.2.2"
   },
   "dependencies": {
-    "amis": "^3.3.0"
+    "amis": "^3.3.0",
+    "element-ui": "^2.15.14",
+    "vue": "^2.7.16"
   }
 }
