@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.样式-2</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            id: 'page',
+            data: {
+                currId: '',
+            },
+            body: [
+                {
+                    type: 'container',
+                    body: 'currId: ${currId}'
+                },
+
+                {
+                    type: 'service',
+                    id: 'service',
+                    api: '/data/task/tasks.json',
+                    body: [
+                        {
+                            type: 'container',
+                            className: 'taskList',
+                            body: [
+                                {
+                                    type: 'each',
+                                    name: 'tasks',
+                                    items: {
+                                        type: 'container',
+                                        className: {
+                                            'taskPanel': true,
+                                            currItem: '${currId == id}'
+                                        },
+                                        body: [
+                                            {
+                                                type: 'container',
+                                                className: 'taskPanelHeader',
+                                                body: '${name}',
+                                                onEvent: {
+                                                    click: {
+                                                        actions: [
+                                                            {
+                                                                actionType: 'setValue',
+                                                                componentId: 'page',
+                                                                args: {
+                                                                    value: {
+                                                                        currId: '${id}'
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "actionType": "reload",
+                                                                componentId: 'sampleCRUD',
+                                                                "data": {
+                                                                    taskId: '${id}',
+                                                                    page: 1,
+                                                                    perPage: 20,
+                                                                    keywords: ''
+                                                                }
+                                                            },
+                                                            {
+                                                                "actionType": "reload",
+                                                                componentId: 'sampleCRUD-2',
+                                                                "data": {
+                                                                    taskId: '${id}',
+                                                                    page: 1,
+                                                                    perPage: 20
+                                                                }
+                                                            },
+                                                            {
+                                                                actionType: 'clear',
+                                                                componentId: 'search-1'
+                                                            },
+                                                            {
+                                                                actionType: 'clear',
+                                                                componentId: 'search-2'
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                type: 'container',
+                                                className: 'taskPanelBody',
+                                                body: [
+                                                    {
+                                                        type: 'container',
+                                                        className: 'taskPanelBodyRow',
+                                                        body: [
+                                                            {
+                                                                type: 'container',
+                                                                className: 'taskPanelBodyRowLeft',
+                                                                body: '运维负责人：'
+                                                            },
+                                                            {
+                                                                type: 'container',
+                                                                className: 'taskPanelBodyRowRight',
+                                                                body: '${owner}'
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        type: 'container',
+                                                        className: 'taskPanelBodyRow',
+                                                        body: [
+                                                            {
+                                                                type: 'container',
+                                                                className: 'taskPanelBodyRowLeft',
+                                                                body: '业务可用率：'
+                                                            },
+                                                            {
+                                                                type: 'container',
+                                                                className: 'taskPanelBodyRowRight',
+                                                                body: {
+                                                                    "type": "progress",
+                                                                    "value": 60
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        type: 'container',
+                                                        className: 'taskPanelBodyRow taskPanelBodyRowCenter',
+                                                        body: {
+                                                            type: 'container',
+                                                            className: 'taskBtns',
+                                                            body: [
+                                                                {
+                                                                    "type": "button",
+                                                                    "label": "编辑",
+                                                                    "level": "default",
+                                                                    "icon": "far fa-edit",
+                                                                    "className": "mr-2",
+                                                                    "size": "xs"
+                                                                },
+                                                                {
+                                                                    "type": "button",
+                                                                    "label": "删除",
+                                                                    "icon": "fa fa-trash-alt",
+                                                                    "level": "default",
+                                                                    "className": "text-danger",
+                                                                    "confirmText": "确定要删除？",
+                                                                    "api": {
+                                                                        "method": "post",
+                                                                        "url": ""
+                                                                    },
+                                                                    "size": "xs"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+
+                    "onEvent": {
+                        "fetchInited": {
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    componentId: 'sampleCRUD',
+                                    "data": {
+                                        taskId: '${tasks[0].id}'
+                                    }
+                                },
+                                {
+                                    "actionType": "reload",
+                                    componentId: 'sampleCRUD-2',
+                                    "data": {
+                                        taskId: '${tasks[0].id}'
+                                    }
+                                },
+                                {
+                                    actionType: 'setValue',
+                                    componentId: 'page',
+                                    args: {
+                                        value: {
+                                            currId: '${tasks[0].id}'
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+
+                {
+                    type: 'crud',
+                    id: 'sampleCRUD',
+                    api: '/data/sample.json?taskId=${currId}&page=${page}&perPage=${perPage}&keywords=${keywords}',
+                    syncLocation: false,
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    headerToolbar: [
+                        {
+                            id: 'search-1',
+                            type: 'search-box',
+                            align: 'right'
+                        }
+                    ],
+                    columns: [
+                        { name: 'id', label: 'ID' },
+                        { name: 'engine', label: 'Engine' },
+                        { name: 'browser', label: 'Browser' },
+                        { name: 'platform', label: 'Platform' },
+                        { name: 'version', label: 'Version' }
+                    ]
+                },
+
+                {
+                    type: 'crud',
+                    id: 'sampleCRUD-2',
+                    api: '/data/sample-2.json?taskId=${currId}&page=${page}&perPage=${perPage}&keywords=${keywords}',
+                    syncLocation: false,
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    headerToolbar: [
+                        {
+                            id: 'search-2',
+                            type: 'search-box',
+                            align: 'right'
+                        }
+                    ],
+                    columns: [
+                        { name: 'id', label: 'ID' },
+                        { name: 'engine', label: 'Engine' },
+                        { name: 'browser', label: 'Browser' },
+                        { name: 'platform', label: 'Platform' },
+                        { name: 'version', label: 'Version' }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

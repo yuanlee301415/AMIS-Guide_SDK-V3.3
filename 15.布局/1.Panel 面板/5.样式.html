@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.样式</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            id: 'page',
+            data: {
+                currId: '',
+            },
+            body: [
+                {
+                    type: 'container',
+                    body: 'currId: ${currId}'
+                },
+
+                {
+                    type: 'service',
+                    id: 'service',
+                    api: '/data/task/tasks.json',
+                    body: [
+                        {
+                            type: 'container',
+                            body: [
+                                {
+                                    type: 'each',
+                                    name: 'tasks',
+                                    items: {
+                                        type: 'panel',
+                                        className: 'taskPanel',
+                                        title: {
+                                            type: 'container',
+                                            body: '${name}',
+                                            className: {
+                                                currItem: '${currId == id}'
+                                            },
+                                            onEvent: {
+                                                click: {
+                                                    actions: [
+                                                        {
+                                                            actionType: 'setValue',
+                                                            componentId: 'page',
+                                                            args: {
+                                                                value: {
+                                                                    currId: '${id}'
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "actionType": "reload",
+                                                            componentId: 'sampleCRUD',
+                                                            "data": {
+                                                                taskId: '${id}',
+                                                                page: 1,
+                                                                perPage: 20,
+                                                                keywords: ''
+                                                            }
+                                                        },
+                                                        {
+                                                            "actionType": "reload",
+                                                            componentId: 'sampleCRUD-2',
+                                                            "data": {
+                                                                taskId: '${id}',
+                                                                page: 1,
+                                                                perPage: 20
+                                                            }
+                                                        },
+                                                        {
+                                                            actionType: 'clear',
+                                                            componentId: 'search-1'
+                                                        },
+                                                        {
+                                                            actionType: 'clear',
+                                                            componentId: 'search-2'
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        body: [
+                                            {
+                                                type: 'container',
+                                                body: '${owner}',
+                                                visibleOn: '${id === currId}'
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+
+                    "onEvent": {
+                        "fetchInited": {
+                            "actions": [
+                                {
+                                    "actionType": "reload",
+                                    componentId: 'sampleCRUD',
+                                    "data": {
+                                        taskId: '${tasks[0].id}'
+                                    }
+                                },
+                                {
+                                    "actionType": "reload",
+                                    componentId: 'sampleCRUD-2',
+                                    "data": {
+                                        taskId: '${tasks[0].id}'
+                                    }
+                                },
+                                {
+                                    actionType: 'setValue',
+                                    componentId: 'page',
+                                    args: {
+                                        value: {
+                                            currId: '${tasks[0].id}'
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+
+                {
+                    type: 'crud',
+                    id: 'sampleCRUD',
+                    api: '/data/sample.json?taskId=${currId}&page=${page}&perPage=${perPage}&keywords=${keywords}',
+                    syncLocation: false,
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    headerToolbar: [
+                        {
+                            id: 'search-1',
+                            type: 'search-box',
+                            align: 'right'
+                        }
+                    ],
+                    columns: [
+                        { name: 'id', label: 'ID' },
+                        { name: 'engine', label: 'Engine' },
+                        { name: 'browser', label: 'Browser' },
+                        { name: 'platform', label: 'Platform' },
+                        { name: 'version', label: 'Version' }
+                    ]
+                },
+
+                {
+                    type: 'crud',
+                    id: 'sampleCRUD-2',
+                    api: '/data/sample-2.json?taskId=${currId}&page=${page}&perPage=${perPage}&keywords=${keywords}',
+                    syncLocation: false,
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    headerToolbar: [
+                        {
+                            id: 'search-2',
+                            type: 'search-box',
+                            align: 'right'
+                        }
+                    ],
+                    columns: [
+                        { name: 'id', label: 'ID' },
+                        { name: 'engine', label: 'Engine' },
+                        { name: 'browser', label: 'Browser' },
+                        { name: 'platform', label: 'Platform' },
+                        { name: 'version', label: 'Version' }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>

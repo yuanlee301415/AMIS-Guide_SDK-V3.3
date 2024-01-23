@@ -1,0 +1,47 @@
+.taskList {
+    width: 250px;
+}
+.taskList .taskPanel {
+    margin-bottom: 1px;
+    font-size: 14px;
+}
+.taskList .taskPanelHeader {
+    height: 38px;
+    line-height: 38px;
+    cursor: pointer;
+    background-color: rgb(220, 222, 231);
+    color: #333;
+    padding: 0 8px;
+}
+.taskList .taskPanelHeader:hover {
+    background-color: #d6d8e0;
+    color: rgb(21, 27, 38);
+}
+.taskList .taskPanelBody {
+    display: none;
+    padding: 10px;
+}
+.taskList .taskPanelBodyRow {
+    padding: 5px 0;
+}
+.taskList .taskPanelBodyRow > * {
+    display: flex;
+}
+.taskList .taskPanelBodyRowCenter > * {
+    justify-content: center;
+}
+
+.taskList .taskPanelBodyRowLeft {
+    width: 90px;
+    text-align: right;
+}
+.taskList .taskPanelBodyRowRight {
+    flex: 1;
+}
+.taskList .currItem .taskPanelHeader {
+    background-color: #6b77a0;
+    color: #fff;
+}
+.taskList .currItem .taskPanelBody {
+    display: block;
+}

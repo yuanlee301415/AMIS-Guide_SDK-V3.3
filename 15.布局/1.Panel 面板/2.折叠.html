@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.折叠</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            id: 'page',
+            data: {
+                expId: '-1'
+            },
+            body: [
+                {
+                    type: 'tpl',
+                    tpl: 'ExpId: ${expId}'
+                },
+
+                {
+                    type: 'service',
+                    id: 'service',
+                    api: '/data/task/tasks.json',
+
+                    body: [
+
+                        {
+                            type: 'container',
+                            body: [
+                                {
+                                    type: 'each',
+                                    name: 'tasks',
+                                    items: {
+                                        type: 'panel',
+                                        title: {
+                                            type: 'container',
+                                            body: '${name}',
+                                            onEvent: {
+                                                click: {
+                                                    actions: [
+                                                        {
+                                                            actionType: 'setValue',
+                                                            componentId: 'page',
+                                                            args: {
+                                                                value: {
+                                                                    expId: '${id}'
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            actionType: 'toast',
+                                                            args: {
+                                                                msg: '${id}'
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        body: [
+                                            {
+                                                type: 'container',
+                                                body: '${owner}',
+                                                visibleOn: '${id === expId}'
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
