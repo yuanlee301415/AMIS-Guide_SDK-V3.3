@@ -1,0 +1,32 @@
+{
+  "status": 0,
+  "msg": "",
+  "data": {
+    "id": "http-4",
+    "functionType": "HTTP-API",
+    "period": "10",
+    "param": [
+      {
+        "apiType": "get",
+        "check": {
+          "prop": "responseCode",
+          "condition": "=",
+          "value": "200"
+        },
+        "address": "http-4-get-url",
+        "params": "http-get-4-param-1"
+      },
+      {
+        "apiType": "post",
+        "check": {
+          "prop": "responseBody",
+          "condition": "=",
+          "value": "http-4-post-1-body"
+        },
+        "address": "http-4-post-url-1",
+        "params": "http-4-post-params-1"
+      }
+    ],
+    "functionName": "http-4"
+  }
+}

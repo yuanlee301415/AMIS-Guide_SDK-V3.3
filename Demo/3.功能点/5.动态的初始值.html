@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.动态的初始值</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <link rel="stylesheet" href="/assets/sdk_beta.css">
+
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const FUNCTION_FORM_CONFIG = {
+            "type": "form",
+            debug: true,
+            "body": [
+                {
+                    type: 'hidden',
+                    name: 'id',
+                    value: '${id}'
+                },
+                {
+                    "type": "input-text",
+                    "id": "u:809395ca51be",
+                    "name": "functionName",
+                    "label": "功能点名称",
+                    "required": true,
+                    validations: {
+                        matchRegexp1: /^[a-z]\w+$/
+                    },
+                    validationErrors: {
+                        isRequired: '请输入名称',
+                        matchRegexp1: '名称只支持字母开头，英文结束'
+                    }
+                },
+                {
+                    "type": "group",
+                    "id": "u:f559dcffc336",
+                    "body": [
+                        {
+                            "type": "select",
+                            "id": "u:d3a8c2261ef3",
+                            "label": "拨测类型",
+                            "name": "functionType",
+                            "options": [
+                                {
+                                    "label": "HTTP协议",
+                                    "value": "HTTP-API"
+                                },
+                                {
+                                    "label": "TCP协议",
+                                    "value": "TCP"
+                                },
+                                {
+                                    "label": "脚本录制",
+                                    "value": "SCRIPT"
+                                }
+                            ],
+                            "multiple": false,
+                            "size": "full",
+                            selectFirst: true,
+                            value: 'HTTP-API'
+                        },
+                        {
+                            "type": "select",
+                            "label": "周期",
+                            "name": "period",
+                            "multiple": false,
+                            "options": [
+                                {
+                                    "label": "5分钟",
+                                    "value": "5"
+                                },
+                                {
+                                    "label": "10分钟",
+                                    "value": "10"
+                                }
+                            ],
+                            "id": "u:8af3ba42bbd0",
+                            "size": "full",
+                            selectFirst: true,
+                        }
+                    ]
+                },
+                {
+                    "type": "container",
+                    "id": "u:93457be854ae",
+                    "body": [
+                        {
+                            "type": "container",
+                            "body": [
+                                {
+                                    "type": "divider",
+                                    "id": "u:8f12ea59306c",
+                                    "className": "name-line"
+                                },
+                                {
+                                    "type": "tag",
+                                    "label": "API管理",
+                                    "id": "u:35d352ac764a",
+                                    "displayMode": "normal",
+                                    "style": {
+                                        "backgroundColor": "#ffffff",
+                                        "borderColor": "#ffffff"
+                                    },
+                                    "className": "name-line-check"
+                                }
+                            ],
+                            "style": {
+                                "position": "relative",
+                                "display": "block"
+                            },
+                            "id": "u:c65c8783d574",
+                            "isFixedHeight": false,
+                            "isFixedWidth": false,
+                            "className": "relative"
+                        },
+                        {
+                            "label": "API类型",
+                            "type": "combo",
+                            "name": "param",
+                            "multiple": true,
+                            "value": [
+                                {}
+                            ],
+                            "items": [
+                                {
+                                    "type": "select",
+                                    "name": "apiType",
+                                    "options": [
+                                        {
+                                            "label": "GET",
+                                            "value": "get"
+                                        },
+                                        {
+                                            "label": "POST",
+                                            "value": "post"
+                                        }
+                                    ],
+                                    "id": "u:d3a8c2261efdfs",
+                                    "multiple": false,
+                                    "className": "pad-none",
+                                    "value": ""
+                                },
+                                {
+                                    "type": "container",
+                                    "id": "u:7ef416658c6a",
+                                    "body": [
+                                        {
+                                            "id": "u:3be1d5b903b9",
+                                            "type": "input-text",
+                                            "label": "URL地址",
+                                            "name": "address",
+                                            "mode": "horizontal",
+                                            "required": true,
+                                            validations: {
+                                                matchRegexp1: /^[a-z]\w+$/
+                                            },
+                                            validationErrors: {
+                                                isRequired: '请输入URL地址',
+                                                matchRegexp1: 'URL地址只支持字母开头，英文结束'
+                                            }
+                                        },
+                                        {
+                                            "type": "textarea",
+                                            "label": "请求头部",
+                                            "name": "head",
+                                            "id": "u:8199f0092e6c",
+                                            "mode": "horizontal",
+                                            "minRows": 3,
+                                            "maxRows": 20,
+                                            value: JSON.stringify({'Content-Type': 'application/x-www-form-urlencoded'}, null, 2),
+                                            visibleOn: "${apiType==='get'}"
+                                        },
+                                        {
+                                            "type": "textarea",
+                                            "label": "请求头部",
+                                            "name": "head",
+                                            "id": "u:8199f0092e6c",
+                                            "mode": "horizontal",
+                                            "minRows": 3,
+                                            "maxRows": 20,
+                                            value: JSON.stringify({'Content-Type': 'application/json'}, null, 2),
+                                            visibleOn: "${apiType==='post'}"
+                                        },
+                                        {
+                                            "type": "textarea",
+                                            "label": "请求参数",
+                                            "name": "params",
+                                            "id": "u:8199f0092e6c",
+                                            "minRows": 3,
+                                            "maxRows": 20,
+                                            "mode": "horizontal"
+                                        },
+                                        {
+                                            "type": "combo",
+                                            "label": "结果判断",
+                                            "name": "check",
+                                            "id": "u:a0db2a5e41fd",
+                                            "mode": "horizontal",
+                                            "items": [
+                                                {
+                                                    "name": "prop",
+                                                    "type": "select",
+                                                    "id": "u:7c1853f10b74",
+                                                    "options": [
+                                                        {
+                                                            "label": "返回码",
+                                                            "value": "responseCode"
+                                                        },
+                                                        {
+                                                            "label": "响应内容",
+                                                            "value": "responseBody"
+                                                        },
+                                                        {
+                                                            "label": "响应时间(ms)",
+                                                            "value": "responseDuration"
+                                                        }
+                                                    ],
+                                                    "multiple": false
+                                                },
+                                                {
+                                                    "name": "condition",
+                                                    "type": "select",
+                                                    "options": [
+                                                        {
+                                                            "label": "等于",
+                                                            "value": "="
+                                                        },
+                                                        {
+                                                            "label": "不等于",
+                                                            "value": "!="
+                                                        },
+                                                        {
+                                                            "label": "大于",
+                                                            "value": ">"
+                                                        },
+                                                        {
+                                                            "label": "小于",
+                                                            "value": "<"
+                                                        }
+                                                    ],
+                                                    "id": "u:d3af3ff036ab",
+                                                    "multiple": false
+                                                },
+                                                {
+                                                    "name": "value",
+                                                    "type": "input-text",
+                                                    "placeholder": "请输入",
+                                                    "id": "u:21ea5db15a87"
+                                                }
+                                            ],
+                                            "strictMode": true,
+                                            "syncFields": [],
+                                            "inputClassName": "no-margin"
+                                        }
+                                    ],
+                                    "style": {
+                                        "position": "static",
+                                        "display": "block",
+                                        "borderLeftStyle": "solid",
+                                        "borderTopStyle": "solid",
+                                        "borderRightStyle": "solid",
+                                        "borderBottomStyle": "solid",
+                                        "borderLeftWidth": 1,
+                                        "borderTopWidth": 1,
+                                        "borderRightWidth": 1,
+                                        "borderBottomWidth": 1,
+                                        "borderLeftColor": "#dedede",
+                                        "borderTopColor": "#dedede",
+                                        "borderRightColor": "#dedede",
+                                        "borderBottomColor": "#dedede",
+                                        "marginTop": "0",
+                                        "marginLeft": "0",
+                                        "marginBottom": "0",
+                                        "marginRight": "0",
+                                        "paddingTop": "20px",
+                                        "paddingLeft": "0",
+                                        "paddingRight": "0",
+                                        "paddingBottom": "20px"
+                                    },
+                                    "isFixedHeight": false,
+                                    "isFixedWidth": false,
+                                    "hiddenOn": "data.apiType === ''"
+                                }
+                            ],
+                            "id": "u:031d2d8455fe",
+                            "strictMode": true,
+                            "syncFields": [],
+                            "multiLine": true,
+                            "noBorder": false
+                        }
+                    ],
+                    "hiddenOn": "data.functionType != 'HTTP-API'"
+                },
+                {
+                    "type": "container",
+                    "id": "u:1716923926ae",
+                    "style": {
+                        "position": "static",
+                        "display": "block"
+                    },
+                    "body": {
+                        type: 'combo',
+                        "name": "param",
+                        "multiLine": true,
+                        items: [
+                            {
+                                "type": "input-text",
+                                "label": "主机IP",
+                                "name": "ip",
+                                "id": "u:634c84959e1f"
+                            }
+                            ,
+                            {
+                                "type": "input-text",
+                                "label": "端口",
+                                "name": "port",
+                                "id": "u:634c84959e1f"
+                            }
+                            ,
+                            {
+                                "type": "combo",
+                                "label": "结果判断",
+                                "name": "check",
+                                "id": "u:2dbb400c9b2c",
+                                "items": [
+                                    {
+                                        "name": "state",
+                                        "type": "select",
+                                        "id": "u:6332ced34433",
+                                        "options": [
+                                            {
+                                                "label": "返回码",
+                                                "value": "responseCode"
+                                            },
+                                            {
+                                                "label": "响应内容",
+                                                "value": "responseBody"
+                                            },
+                                            {
+                                                "label": "响应时间(ms)",
+                                                "value": "responseDuration"
+                                            }
+                                        ],
+                                        "multiple": false,
+                                        "placeholder": ""
+                                    },
+                                    {
+                                        "name": "condition",
+                                        "type": "select",
+                                        "options": [
+                                            {
+                                                "label": "等于",
+                                                "value": "="
+                                            },
+                                            {
+                                                "label": "不等于",
+                                                "value": "!="
+                                            },
+                                            {
+                                                "label": "大于",
+                                                "value": ">"
+                                            },
+                                            {
+                                                "label": "小于",
+                                                "value": "<"
+                                            }
+                                        ],
+                                        "id": "u:66d122f8dfa3",
+                                        "multiple": false
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "input-text",
+                                        "placeholder": "请输入",
+                                        "id": "u:59af3d2ab116"
+                                    }
+                                ],
+                                "strictMode": true,
+                                "syncFields": [],
+                                "inputClassName": "no-margin"
+                            }
+                        ]
+                    },
+                    "hiddenOn": "data.functionType != 'TCP'"
+                },
+                {
+                    "type": "container",
+                    "id": "u:1716923926ae",
+                    "style": {
+                        "position": "static",
+                        "display": "block"
+                    },
+                    "body": {
+                        type: 'combo',
+                        name: 'param',
+                        "multiLine": true,
+                        items: [
+                            {
+                                "type": "input-text",
+                                "label": "脚本",
+                                name: 'script',
+                                labelRemark: {
+                                    type: 'remark',
+                                    content: '脚本。。。。。',
+                                    shape: 'circle',
+                                    icon: 'fa fa-question-circle'
+                                }
+                            },
+                            {
+                                "type": "static",
+                                "label": "结果判断",
+                                "value": "准备完成脚本演练",
+                                "id": "u:5036b5a47542",
+                                "style": {
+                                    "color": "#28a745"
+                                },
+                                "labelClassName": "pt3"
+                            }
+                        ]
+                    },
+                    "hiddenOn": "data.functionType != 'SCRIPT'"
+                }
+            ]
+        }
+
+        const amisJSON = {
+            type: 'page',
+            definitions: {
+                FUNCTION_FORM_CONFIG
+            },
+            body: [
+                {
+                    "label": "新增功能点",
+                    "type": "button",
+                    "actionType": "dialog",
+                    "dialog": {
+                        "title": "新增功能点",
+                        "size": "lg",
+                        "body": {
+                            $ref: 'FUNCTION_FORM_CONFIG',
+                            "api": {
+                                "method": "post",
+                                "url": "/function/add"
+                            },
+                        }
+                    }
+                },
+
+                {
+                    type: 'crud',
+                    api: '/data/function/list.json',
+                    columns: [
+                        {label: 'ID', name: 'id',},
+                        {label: '名称', name: 'functionName',},
+                        {label: '类型', name: 'functionType',},
+                        {label: '周期', name: 'period',},
+                        {
+                            "type": "operation",
+                            "label": "操作",
+                            "buttons": [
+                                {
+                                    "label": "修改",
+                                    "type": "button",
+                                    "actionType": "dialog",
+                                    "dialog": {
+                                        "title": "编辑功能点",
+                                        "size": "lg",
+                                        "body": {
+                                            $ref: 'FUNCTION_FORM_CONFIG',
+                                            "api": {
+                                                "method": "post",
+                                                "url": "/function/edit"
+                                            },
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
