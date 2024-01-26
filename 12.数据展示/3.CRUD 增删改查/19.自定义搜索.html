@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19.自定义搜索</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png"/>
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <style>
+        .crudBox {
+            position: relative;
+        }
+        .cxd-Form.searchBox {
+            position: absolute;
+            z-index: 10000;
+            right: 100px;
+            top: 10px;
+        }
+    </style>
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper" style="padding: 200px 0;"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    type: 'button',
+                    label: 'Reset',
+                    onEvent: {
+                        click: {
+                            actions: [
+                                {
+                                    actionType: 'setValue',
+                                    componentId: 'searchBox_1',
+                                    args: {
+                                        value: {
+                                            keyword: ''
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "crud",
+                    "syncLocation": false,
+                    "api": BASE_URL+"/amis/api/mock2/sample",
+                    className: 'crudBox',
+                    "filter": {
+                        title: '',
+                        wrapWithPanel: false,
+                        id: 'searchBox_1',
+                        className: 'searchBox',
+                        "body": [
+                            {
+                                "type": "input-group",
+                                "body": [
+                                    {
+                                        "type": "input-text",
+                                        "placeholder": "搜索作业ID/名称",
+                                        "inputClassName": "b-r-none p-r-none",
+                                        "name": "keyword"
+                                    },
+                                    {
+                                        "type": "submit",
+                                        "label": "搜索",
+                                        "level": "primary"
+                                    }
+                                ]
+                            },
+                        ]
+                    },
+                    "headerToolbar": [
+                        {
+                            "type": "columns-toggler",
+                            "align": "right"
+                        }
+                    ],
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    "columns": [
+                        {
+                            "name": "id",
+                            "label": "ID"
+                        },
+                        {
+                            "name": "engine",
+                            "label": "Rendering engine"
+                        },
+                        {
+                            "name": "browser",
+                            "label": "Browser"
+                        },
+                        {
+                            "name": "platform",
+                            "label": "Platform(s)"
+                        },
+                        {
+                            "name": "version",
+                            "label": "Engine version"
+                        },
+                        {
+                            "name": "grade",
+                            "label": "CSS grade"
+                        }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
