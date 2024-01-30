@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8.表单校验-4-弹窗+Combo</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": [
+                {
+                    type: 'button',
+                    actionType: 'dialog',
+                    label: 'Add',
+                    size: 'lg',
+                    dialog: {
+                        title: '新增',
+                        size: 'lg',
+                        showErrorMsg: false,
+                        body: {
+                            "type": "form",
+                            "api": BASE_URL+"/amis/api/mock2/form/saveForm",
+                            "messages": {
+                                "validateFailed": ""
+                            },
+                            "body": [
+                                {
+                                    "type": "input-text",
+                                    "name": "name",
+                                    "label": "姓名",
+                                    required: true,
+                                },
+                                {
+                                    "type": "input-text",
+                                    "name": "author",
+                                    "label": "作者",
+                                    required: true,
+                                },
+                                {
+                                    "type": "input-datetime",
+                                    "name": "date",
+                                    "label": "时间"
+                                },
+                                {
+                                    "type": "combo",
+                                    "name": "user",
+                                    "label": "用户",
+
+                                    showErrorMsg: false,
+                                    "messages": {
+                                        "validateFailed": ""
+                                    },
+                                    "items": [
+                                        {
+                                            "name": "text",
+                                            "label": "名字",
+                                            "type": "input-text",
+                                            required: true,
+                                        },
+                                        {
+                                            "name": "gender",
+                                            "label": "性别",
+                                            "type": "select",
+                                            required: true,
+                                            "options": [
+                                                "男",
+                                                "女"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                        }
+                    }
+                },
+            ]
+        };
+        amis.embed('#root', amisJSON,
+            {},
+            {
+                hideValidateFailedDetail: false
+            }
+            )
+    })();
+</script>
+
+</html>
