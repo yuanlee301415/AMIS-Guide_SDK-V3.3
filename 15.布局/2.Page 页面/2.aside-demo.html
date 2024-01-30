@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.aside-demo</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            type: 'page',
+            id: 'page',
+            data: {
+                expId: '-1',
+                currId: '',
+            },
+            aside: {
+                type: 'service',
+                id: 'service',
+                api: '/data/task/tasks-2.json',
+
+                body: [
+                    {
+                        type: 'container',
+                        body: 'ExpId: ${expId}'
+                    },
+                    {
+                        type: 'container',
+                        body: 'currId: ${currId}'
+                    },
+                    {
+                        type: 'container',
+                        body: [
+                            {
+                                type: 'each',
+                                name: 'tasks',
+                                items: {
+                                    type: 'panel',
+                                    title: {
+                                        type: 'container',
+                                        body: '${name}',
+                                        onEvent: {
+                                            click: {
+                                                actions: [
+                                                    {
+                                                        actionType: 'setValue',
+                                                        componentId: 'page',
+                                                        args: {
+                                                            value: {
+                                                                expId: '${id}'
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        actionType: 'toast',
+                                                        args: {
+                                                            msg: 'expId: ${id}'
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    body: [
+                                        {
+                                            type: 'container',
+                                            body: '${owner}',
+                                            visibleOn: '${id === expId}',
+                                            onEvent: {
+                                                click: {
+                                                    actions: [
+                                                        {
+                                                            actionType: 'setValue',
+                                                            componentId: 'page',
+                                                            args: {
+                                                                value: {
+                                                                    currId: '${id}'
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            actionType: 'toast',
+                                                            args: {
+                                                                msg: 'currId: ${id}'
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+
+                "onEvent": {
+                    "fetchInited": {
+                        "actions": [
+                            {
+                                "actionType": "reload",
+                                componentId: 'taskCRUD',
+                                "data": {
+                                    taskId: '${tasks[0].id}'
+                                }
+                            },
+                            {
+                                "actionType": "reload",
+                                componentId: 'sampleCRUD',
+                                "data": {
+                                    taskId: '${tasks[0].id}'
+                                }
+                            },
+                            {
+                                actionType: 'setValue',
+                                componentId: 'page',
+                                args: {
+                                    value: {
+                                        currId: '${tasks[0].id}'
+                                    }
+                                }
+                            },
+                            {
+                                actionType: 'setValue',
+                                componentId: 'page',
+                                args: {
+                                    value: {
+                                        expId: '${tasks[0].id}'
+                                    }
+                                }
+                            },
+
+                        ]
+                    }
+                }
+            },
+            "css": {
+                ".aside": {
+                    "--Page-aside-width": "400px"
+                }
+            },
+            asideClassName: 'aside',
+            body: [
+                {
+                    id: 'taskCRUD',
+                    type: 'crud',
+                    api: '/data/task/tasks.json?page=${page}&perPage=${perPage}&taskId=${currId}',
+                    syncLocation: false,
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    columns: [
+                        { label: 'ID', value: 'id' },
+                        { label: 'Name', value: 'name' },
+                        { label: 'Owner', value: 'owner' },
+                    ]
+                },
+                {
+                    type: 'crud',
+                    id: 'sampleCRUD',
+                    api: '/data/sample.json?page=${page}&perPage=${perPage}&taskId=${currId}',
+                    syncLocation: false,
+                    "footerToolbar": [
+                        "switch-per-page",
+                        "pagination"
+                    ],
+                    columns: [
+                        { name: 'id', label: 'ID' },
+                        { name: 'engine', label: 'Engine' },
+                        { name: 'browser', label: 'Browser' },
+                        { name: 'platform', label: 'Platform' },
+                        { name: 'version', label: 'Version' }
+                    ]
+                }
+            ]
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
