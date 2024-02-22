@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.Label-width</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/logo.png" />
+    <link rel="stylesheet" href="/node_modules/amis/sdk/sdk.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/helper.css">
+    <link rel="stylesheet" href="/node_modules/amis/sdk/iconfont.css">
+    <script src="/node_modules/amis/sdk/sdk.js"></script>
+    <script>
+        const BASE_URL = 'https://aisuda.bce.baidu.com'
+        window.enableAMISDebug = true;
+    </script>
+</head>
+
+<body>
+<div id="root" class="app-wrapper"></div>
+</body>
+
+<script type="text/javascript">
+    (function () {
+        const amis = amisRequire('amis/embed');
+        const amisJSON = {
+            "type": "page",
+            "body": {
+                "type": "chart",
+                config: {
+                    "title": {
+                        "text": "销售情况"
+                    },
+                    "tooltip": {},
+                    "legend": {
+                        "data": [
+                            "销量"
+                        ]
+                    },
+                    "yAxis": {
+                        "data": [
+                            "衬衫",
+                            "羊毛衫",
+                            "雪纺衫雪纺衫雪纺衫雪纺衫雪纺衫雪纺衫雪纺衫雪纺衫",
+                            "裤子",
+                            "高跟鞋高跟鞋",
+                            "袜子"
+                        ],
+                        axisLabel: {
+                            formatter: function (value) {
+                                if (value.length > 10) {
+                                    return value.substring(0, 10) + "...";
+                                } else {
+                                    return value;
+                                }
+                            }
+                        }
+                    },
+                    grid: {
+                        left: 0,   // 与容器左侧的距离
+                        right: 0, // 与容器右侧的距离
+                        containLabel: true // grid 区域是否包含坐标轴的刻度标签
+                    },
+                    "xAxis": {},
+                    "series": [
+                        {
+                            "name": "销量",
+                            "type": "bar",
+                            "data": [
+                                5,
+                                18,
+                                97,
+                                100,
+                                100,
+                                46
+                            ]
+                        }
+                    ]
+                }
+            }
+        };
+        amis.embed('#root', amisJSON)
+    })();
+</script>
+
+</html>
